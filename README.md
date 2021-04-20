@@ -19,5 +19,5 @@ This repository provides development tools like postman collection which helps i
 * In order to use the APIs provided in the Postman collection you should join LinkedIn Talent Solutions Partner Program.
 Click [here](https://docs.microsoft.com/en-gb/linkedin/talent/apply-with-linkedin#request-access) to find details on how to join LinkedIn Talent Solutions Partner Program.
 
-> [!NOTE] 
+> [!NOTE]
 > All the development tools provided in this repository are owned by LinkedIn Corporation. By downloading or using the LinkedIn Development tools in this repository, you agree to be bound by the terms of License Agreement. Please read the License document carefully for more details.
