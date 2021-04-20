@@ -167,7 +167,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
+									"let jsonData = JSON.parse(responseBody);",
 									"postman.setEnvironmentVariable(\"id\", jsonData.elements[0].id);",
 									""
 								],
@@ -191,11 +191,6 @@
 							{
 								"key": "Authorization",
 								"value": "Bearer {{access_token}}"
-							},
-							{
-								"key": "X-LinkedIn-traceDataContext",
-								"value": "forceTraceEnabled=true,debugEnabled=true,traceGroupingKey=msmyth-ei",
-								"type": "text"
 							}
 						],
 						"body": {
@@ -445,15 +440,15 @@
 	],
 	"variable": [
 		{
-			"key": "client_id",
+			"key": "customer_client_id",
 			"value": ""
 		},
 		{
-			"key": "client_secret",
+			"key": "customer_client_secret",
 			"value": ""
 		},
 		{
-			"key": "org_id",
+			"key": "customer_org_id",
 			"value": ""
 		},
 		{
@@ -465,7 +460,7 @@
 			"value": ""
 		},
 		{
-			"key": "webhook_url",
+			"key": "customer_webhook_url",
 			"value": ""
 		}
 	]

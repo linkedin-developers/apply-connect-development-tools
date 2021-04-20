@@ -11,7 +11,7 @@ When Apply Connect has been integrated into an ATS, a customer can then enable A
 * A widget that triggers on hover that displays an insights overview - designed for candidate list views.
 * A full page Apply Connect profile widget rendered on the application view of a candidate.
 
-This repository provides development tools like postman collection which helps in integration with `Apply Connect`.
+This repository provides development tools to help integrate with [Apply Connect](https://docs.microsoft.com/en-us/linkedin/talent/apply-connect).
 
 ## Prerequisite
 
