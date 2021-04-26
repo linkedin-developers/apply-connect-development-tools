@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "0 - Customer Configuration",
+			"name": "Customer Configuration",
 			"item": [
 				{
 					"name": "Provision Customer Application",
@@ -21,7 +21,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{access_token}}"
+								"value": "Bearer {{parent_app_access_token}}"
 							}
 						],
 						"body": {
@@ -69,7 +69,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "Bearer {{access_token}}"
+								"value": "Bearer {{parent_app_access_token}}"
 							}
 						],
 						"body": {
@@ -117,7 +117,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer {{access_token}}",
+								"value": "Bearer {{parent_app_access_token}}",
 								"type": "text"
 							}
 						],
@@ -154,11 +154,72 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get Access Token - Parent Application",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"parent_app_access_token\", jsonData.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "{{parent_app_client_id}}",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{parent_app_client_secret}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://www.linkedin.com/oauth/v2/accessToken",
+							"protocol": "https",
+							"host": [
+								"www",
+								"linkedin",
+								"com"
+							],
+							"path": [
+								"oauth",
+								"v2",
+								"accessToken"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
 		{
-			"name": "1 - Sync Jobs",
+			"name": "Create and Manage Jobs",
 			"item": [
 				{
 					"name": "Sync Jobs",
@@ -168,7 +229,7 @@
 							"script": {
 								"exec": [
 									"let jsonData = JSON.parse(responseBody);",
-									"postman.setEnvironmentVariable(\"id\", jsonData.elements[0].id);",
+									"postman.setEnvironmentVariable(\"simple_job_posting_id\", jsonData.elements[0].id);",
 									""
 								],
 								"type": "text/javascript"
@@ -190,12 +251,12 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{access_token}}"
+								"value": "Bearer {{child_app_access_token}}"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"elements\": [\n        {\n            \"externalJobPostingId\": \"jobposting-{{$guid}}\",\n            \"title\": \"Software Engineer\",\n            \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\",\n            \"integrationContext\": \"urn:li:organization:{{org_id}}\",\n            \"state\": \"LISTED\",\n            \"listingType\": \"BASIC\",\n            \"listedAt\": {{$timestamp}}000,\n            \"location\": \"San Francisco, CA\",\n            \"companyApplyUrl\": \"\",\n            \"onsiteApplyConfiguration\": {\n                \"jobApplicationWebhookUrl\": \"{{webhook_url}}\",\n                \"questions\": {\n                    \"resumeQuestions\": {\n                        \"resumeQuestionRequirement\": \"REQUIRED\"\n                    },\n                    \"coverLetterQuestions\": {\n                        \"coverLetterQuestionRequirement\": \"REQUIRED\"\n                    },\n                    \"voluntarySelfIdentificationQuestions\": {},\n                    \"educationQuestions\": {\n                        \"educationExperienceQuestionSet\": {}\n                    },\n                    \"workQuestions\": {\n                        \"workExperienceQuestionSet\": {}\n                    }\n                }\n            }\n        }\n    ]\n}",
+							"raw": "{\n    \"elements\": [\n        {\n            \"externalJobPostingId\": \"jobposting-0001\",\n            \"title\": \"Software Engineer\",\n            \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\",\n            \"integrationContext\": \"urn:li:organization:{{integration_context}}\",\n            \"state\": \"LISTED\",\n            \"listingType\": \"BASIC\",\n            \"listedAt\": {{$timestamp}}000,\n            \"location\": \"San Francisco, CA\",\n            \"companyApplyUrl\": \"http://localhost:5000\",\n            \"onsiteApplyConfiguration\": {\n                \"jobApplicationWebhookUrl\": \"{{customer_webhook_url}}\",\n                \"questions\": {\n                    \"resumeQuestions\": {\n                        \"resumeQuestionRequirement\": \"REQUIRED\"\n                    },\n                    \"coverLetterQuestions\": {\n                        \"coverLetterQuestionRequirement\": \"REQUIRED\"\n                    },\n                    \"voluntarySelfIdentificationQuestions\": {},\n                    \"educationQuestions\": {\n                        \"educationExperienceQuestionSet\": {}\n                    },\n                    \"workQuestions\": {\n                        \"workExperienceQuestionSet\": {}\n                    },\n                    \"additionalQuestions\": {\n                        \"customQuestionSets\": [\n                            {\n                                \"questions\": [\n                                    {\n                                        \"partnerQuestionIdentifier\": \"question-0001\",\n                                        \"questionDetails\": {\n                                            \"multipleChoiceQuestionDetails\": {\n                                                \"choices\": [\n                                                    {\n                                                        \"symbolicName\": \"yes\",\n                                                        \"displayValue\": \"Yes\"\n                                                    },\n                                                    {\n                                                        \"symbolicName\": \"no\",\n                                                        \"displayValue\": \"No\"\n                                                    }\n                                                ],\n                                                \"preferredFormComponent\": \"RADIO_BUTTONS\",\n                                                \"selectMultiple\": false\n                                            }\n                                        },\n                                        \"required\": false,\n                                        \"questionText\": \"Do you want to work here?\"\n                                    }\n                                ]\n                            }\n                        ]\n                    }\n                }\n            }\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -236,11 +297,11 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer {{access_token}}"
+								"value": "Bearer {{child_app_access_token}}"
 							}
 						],
 						"url": {
-							"raw": "https://api.linkedin.com/v2/simpleJobPostingTasks?ids={{id}}",
+							"raw": "https://api.linkedin.com/v2/simpleJobPostingTasks?ids={{simple_job_posting_id}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -254,7 +315,7 @@
 							"query": [
 								{
 									"key": "ids",
-									"value": "{{id}}"
+									"value": "{{simple_job_posting_id}}"
 								}
 							]
 						}
@@ -264,7 +325,7 @@
 			]
 		},
 		{
-			"name": "2 - Receive Applications",
+			"name": "Receive Applications",
 			"item": [
 				{
 					"name": "Get Resume/Cover Letter",
@@ -273,7 +334,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer {{access_token}}"
+								"value": "Bearer  {{child_app_access_token}}"
 							}
 						],
 						"url": {
@@ -306,7 +367,7 @@
 			]
 		},
 		{
-			"name": "3 - Sync Application Feedback Signals",
+			"name": "Sync Application Feedback Signals",
 			"item": [
 				{
 					"name": "Sync Hearing Back Signals",
@@ -315,7 +376,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer {{access_token}}",
+								"value": "Bearer {{child_app_access_token}}",
 								"type": "text"
 							},
 							{
@@ -331,7 +392,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"jobApplicationId\": \"urn:li:jobApplication:{{job_application_id}}\",\n    \"action\": \"APPLICATION_VIEWED\",\n    \"performedAt\": {{$timestamp}}000,\n    \"integrationContext\": \"urn:li:organization:{{org_id}}\"\n}",
+							"raw": "{\n    \"jobApplicationId\": \"urn:li:jobApplication:{{job_application_id}}\",\n    \"action\": \"APPLICATION_VIEWED\",\n    \"performedAt\": {{$timestamp}}000,\n    \"integrationContext\": \"{{integration_context}}\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -357,14 +418,14 @@
 			]
 		},
 		{
-			"name": "Get Access Token",
+			"name": "Get Access Token - Child Application",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
 							"let jsonData = JSON.parse(responseBody);",
-							"postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);"
+							"postman.setEnvironmentVariable(\"child_app_access_token\", jsonData.access_token);"
 						],
 						"type": "text/javascript"
 					}
@@ -390,12 +451,12 @@
 						},
 						{
 							"key": "client_id",
-							"value": "{{client_id}}",
+							"value": "{{customer_app_client_id}}",
 							"type": "text"
 						},
 						{
 							"key": "client_secret",
-							"value": "{{client_secret}}",
+							"value": "{{customer_app_client_secret}}",
 							"type": "text"
 						}
 					]
@@ -440,27 +501,31 @@
 	],
 	"variable": [
 		{
-			"key": "customer_client_id",
+			"key": "customer_app_client_id",
 			"value": ""
 		},
 		{
-			"key": "customer_client_secret",
+			"key": "customer_app_client_secret",
 			"value": ""
 		},
 		{
-			"key": "customer_org_id",
+			"key": "integration_context",
 			"value": ""
 		},
 		{
-			"key": "parent_client_id",
+			"key": "parent_app_client_id",
 			"value": ""
 		},
 		{
-			"key": "parent_client_secret",
+			"key": "parent_app_client_secret",
 			"value": ""
 		},
 		{
 			"key": "customer_webhook_url",
+			"value": ""
+		},
+		{
+			"key": "job_application_id",
 			"value": ""
 		}
 	]
