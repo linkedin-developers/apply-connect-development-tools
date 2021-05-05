@@ -1,6 +1,6 @@
 # How to use Postman Collections
 
-The easiest way to get started using the Apply with Linkedin APIs is to use our Postman collections. Postman is a free-to-download tool for making HTTP requests. You can find more details about Postman [here](https://www.postman.com).
+The easiest way to get started using the Apply Connect APIs is to use our Postman collections. Postman is a free-to-download tool for making HTTP requests. You can find more details about Postman [here](https://www.postman.com).
 The following steps outline the necessary actions in order to install Postman and gain certainty that everything is working as it should be.
 If you prefer, you can explore our API with other tools like curl.
 
