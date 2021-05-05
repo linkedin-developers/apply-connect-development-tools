@@ -27,13 +27,13 @@ Visit www.getpostman.com and download the version of Postman required for your p
 
 |Variable Name|Description|
 |---|---|
-|parent_app_client_id|Client id of Parent's Application. It will be used to get access token to be able to call `Provision Customer Application` APIs|
-|parent_app_client_secret|Client secret of Parent's Application. It will be used to get access token to be able to call `Provision Customer Application` APIs|
-|customer_app_client_id|Client id of Customer's Application. It will be used to get access token to be able to call `Sync Jobs` APIs, etc.|
-|customer_app_client_secret|Client secret of Customer's Application. It will be used to get access token to be able to call `Sync Jobs` APIs, etc.|
-|integration_context|The value for `integration_context` is obtained when customer has requested for `Apply Connect` integration using the `ATS Integration Configuration Plugin`|
+|parent_app_client_id|Client id of Parent's Application. It will be used to get an access token and call `Provision Customer Application` APIs|
+|parent_app_client_secret|Client secret of Parent's Application. It will be used to get an access token and call `Provision Customer Application` APIs|
+|customer_app_client_id|Client id of Customer's Application. It will be used to get an access token and call `Sync Jobs` APIs, etc.|
+|customer_app_client_secret|Client secret of Customer's Application. It will be used to get an access token and call `Sync Jobs` APIs, etc.|
+|integration_context|The value for `integration_context` is obtained when a customer has requested the `Apply Connect` integration using the `ATS Integration Configuration Plugin`|
 |customer_webhook_url|Webhook url that will be used to receive job applications. It will be used when configuring `jobApplicationCallbackUrl` using `Sync Jobs` APIs.|
-|job_application_id| Application Id received when a successful application is delivered to `customer_webhook_url`. It will be used when updating `jobApplicationLifecycleActions` APIs.|
+|job_application_id| Application id received when a successful application is delivered to a `customer_webhook_url`, it will be used when updating `jobApplicationLifecycleActions` APIs.|
 
 ## How to use Apply Connect Collections
 
@@ -41,7 +41,7 @@ To make it easier for developer's we've leveraged using Postman environment vari
 
 * Customer Configuration
 
-  * Get Access Token - Parent Application: A `parent_app_access_token` will be created and set to be used for the various APIs under the Customer Configuration directory. The `parent_app_access_token` has been set as a Bearer token and will be used for requests requiring it.
+  * get an access Token - Parent Application: A `parent_app_access_token` will be created and set to be used for the various APIs under the Customer Configuration directory. The `parent_app_access_token` has been set as a Bearer token and will be used for requests requiring it.
 
 * Create and Manage Jobs
 
