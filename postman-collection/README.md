@@ -37,7 +37,7 @@ Visit www.getpostman.com and download the version of Postman required for your p
 
 ## How to use Apply Connect Collections
 
-To make it easier for developer's we've leveraged using Postman environment variables across the various APIs. Below are notes of how some of the associated APIs work.
+To make it easier for developer's we've leveraged using Postman [environment variables](https://learning.postman.com/docs/sending-requests/variables/) across the various APIs. Below are notes of how some of the associated APIs work.
 
 * Customer Configuration
 
