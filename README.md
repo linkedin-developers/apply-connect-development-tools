@@ -16,8 +16,8 @@ This repository provides development tools to help integrate with [Apply Connect
 ## Prerequisite
 
 * Read [**Apply Connect**](https://docs.microsoft.com/en-gb/linkedin/talent/apply-connect) documentation.
-* In order to use the APIs provided in the Postman collection you should join LinkedIn Talent Solutions Partner Program.
-Click [here](https://docs.microsoft.com/en-gb/linkedin/talent/apply-with-linkedin#request-access) to find details on how to join LinkedIn Talent Solutions Partner Program.
+* In order to use the APIs provided in the Postman collection you should must be a LinkedIn Talent Solutions partner.
+Click [here](https://docs.microsoft.com/en-gb/linkedin/talent/apply-with-linkedin#request-access) to find details on how to join the LinkedIn Talent Solutions Partner Program.
 
 ---
 **NOTE**
